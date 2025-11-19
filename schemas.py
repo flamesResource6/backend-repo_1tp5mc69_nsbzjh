@@ -5,7 +5,7 @@ FoodKasir collections using Pydantic models.
 Each model name (lowercased) is used as the MongoDB collection name.
 """
 from pydantic import BaseModel, Field
-from typing import Optional, List
+from typing import Optional, List, Literal
 
 class Menuitem(BaseModel):
     """
@@ -34,3 +34,4 @@ class Order(BaseModel):
     total: float = Field(..., ge=0, description="Total amount for the order")
     note: Optional[str] = Field(None, description="Optional note")
     payment_method: Optional[str] = Field(None, description="Cash, QRIS, etc.")
+    status: Literal["held", "completed", "void"] = Field("completed", description="Order status")
